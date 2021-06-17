@@ -6,21 +6,62 @@
   <script src="https://schedpoc-testdrive.cs174.force.com/customer/lightning/lightning.out.js"></script>
 </head>
 <body>
-    <h1>Hello Scheduler 5</h1>
-    <script>
-      $Lightning.use("runtime_appointmentbooking/SchedulerPOCInboundNewGuest",
-      function() { // Callback once framework and app load
-      $Lightning.createComponent(
-      "lightning:flow", // top-level component of your app
-      { }, // attributes to set on the component when created
-      "main", // the DOM location to insert the component
-      function(component) { // API name of the Flow
-      component.startFlow("SchedulerPOCInboundNewGuest”);
+    <h1>Hello Scheduler 6</h1>
+    <style type='text/css'>
+      .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #005290;
+        font-family: "Arial", sans-serif;
       }
-      );
-      }, 'https://schedpoc-testdrive.cs174.force.com/customer/' // Site endpoint
-      );
-      </script>
-    <noscript>You need to enable JavaScript to view the full site.</noscript>
+      .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #005290;
+      }
+    </style>
+    
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+      var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+    
+        //embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
+        //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+    
+        //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+        //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+    
+        // Settings for Field Service
+    
+        embedded_svc.settings.enabledFeatures = ['FieldService'];
+        embedded_svc.settings.entryFeature = 'FieldService';
+    
+        embedded_svc.settings.useCustomAuthentication = false;
+        embedded_svc.settings.loginClientId = '';
+        embedded_svc.settings.loginRedirectURL = '';
+        embedded_svc.settings.loginTargetQuerySelector = '';
+        embedded_svc.settings.authenticationStartLabel = '';
+    
+        embedded_svc.init(
+          'https://sem-ag-devhub--schedpoc.my.salesforce.com',
+          'https://schedpoc-testdrive.cs174.force.com/customer',
+          gslbBaseURL,
+          '00D7Z0000004qqI',
+          'SchedulerPOC_Inbound',
+          {
+            
+          }
+        );
+      };
+    
+      if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://sem-ag-devhub--schedpoc.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+          initESW(null);
+        };
+        document.body.appendChild(s);
+      } else {
+        initESW('https://service.force.com');
+      }
+    </script>
 </body>
 </html>
