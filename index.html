@@ -3,14 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>SchedulerPOC</title>
-  <link rel="stylesheet" href="main.css">
+  <script src="https://schedpoc-testdrive.cs174.force.com/customer/lightning/lightning.out.js"></script>
 </head>
-<body class="light-theme">
+<body>
     <h1>Hello Scheduler</h1>
-    <div>
-      <button class="btn">Dark</button>
-    </div>
-    <script src="app.js"></script>
+    <script>
+      $Lightning.use("runtime_appointmentbooking/SchedulerPOCInboundNewGuest",
+      function() { // Callback once framework and app load
+      $Lightning.createComponent(
+      "lightning:flow", // top-level component of your app
+      { }, // attributes to set on the component when created
+      "main", // the DOM location to insert the component
+      function(component) { // API name of the Flow
+      component.startFlow("SchedulerPOCInboundNewGuest”);
+      }
+      );
+      }, 'https://schedpoc-testdrive.cs174.force.com/customer/' // Site endpoint
+      );
+      </script>
     <noscript>You need to enable JavaScript to view the full site.</noscript>
 </body>
 </html>
